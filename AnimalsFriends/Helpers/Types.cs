@@ -11,8 +11,7 @@ namespace AnimalsFriends.Helpers
         {
             NeedHome,
             Adopted,
-            InMedicalCare,
-            JustRescued
+            InMedicalCare
         }
 
         public enum AnimalSpecies
@@ -31,6 +30,12 @@ namespace AnimalsFriends.Helpers
         {
             News,
             Causes
+        }
+
+        public enum Gender
+        {
+            Male,
+            Female
         }
     }
 }

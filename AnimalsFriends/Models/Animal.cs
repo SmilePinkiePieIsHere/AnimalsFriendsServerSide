@@ -13,7 +13,7 @@ namespace AnimalsFriends.Models
 
         public string Name { get; set; }
 
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }
 
         //can make it class later on
         public AnimalStatus CurrentStatus { get; set; }
