@@ -33,3 +33,4 @@ D:\Университет\Магистратура\дипломна\AnimalsFrien
 D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
 D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\obj\Debug\netcoreapp3.1\AnimalsFriends.csproj.CopyComplete
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll

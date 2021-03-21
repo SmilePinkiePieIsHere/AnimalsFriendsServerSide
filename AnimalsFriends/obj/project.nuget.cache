@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "iC1Gxx38VwijR6XZoYxrVtMGEFLpBTDRf9xyoFV9mqSsGqGH1szlZWrFObmwCjQJp2dfSIMaYlR6uLQJDWp6Mw==",
+  "dgSpecHash": "M2qJxmkpK+iBCV/MGUt2Y/ZjPHhJMPFHZZUZWC1xU0oXl7Ud3wtHHQ7O9eRjFHUUVI2kCZFNltI4OxICkZV39Q==",
   "success": true,
   "projectFilePath": "D:\\Университет\\Магистратура\\дипломна\\AnimalsFriends\\AnimalsFriends\\AnimalsFriends.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "C:\\Users\\pevan\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\pevan\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
     "C:\\Users\\pevan\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\pevan\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\pevan\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",
     "C:\\Users\\pevan\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "C:\\Users\\pevan\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.1\\system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512"

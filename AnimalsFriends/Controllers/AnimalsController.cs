@@ -1,10 +1,7 @@
-﻿using AnimalsFriends.Models;
+﻿using AnimalsFriends.Helpers;
+using AnimalsFriends.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace AnimalsFriends.Controllers
 {
@@ -21,9 +18,38 @@ namespace AnimalsFriends.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Animal> GetAll()
+        public IActionResult GetAll([FromQuery] AnimalQueryParameters queryParameters)
         {
-            return _context.Animals.ToList();
+            IQueryable<Animal> animals = _context.Animals;
+            
+            if (queryParameters.Status != null)
+            {
+                animals = animals.Where(a => a.CurrentStatus.ToString().ToLower() == queryParameters.Status.ToLower());
+            }
+
+            animals = animals
+               .Skip(queryParameters.Size * (queryParameters.Page - 1))
+               .Take(queryParameters.Size);
+
+            return Ok(animals.ToArray());
+        }
+
+        [HttpGet("{id:int}")]
+        public IActionResult GetAnimal(int id)
+        {
+            var animal = _context.Animals.Find(id);
+            if(animal == null)
+            {
+                return NotFound();
+            }
+            return Ok(animal);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAnimal()
+        {
+            var animals = _context.Animals.ToList();
+            return Ok(animals);
         }
     }
 }

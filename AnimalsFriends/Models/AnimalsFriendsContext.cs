@@ -18,7 +18,6 @@ namespace AnimalsFriends.Models
             modelBuilder.Entity<User>().HasMany(u => u.Posts).WithOne(a => a.User).HasForeignKey(a => a.UserId);
             modelBuilder.Entity<Post>().HasOne(p => p.User);
 
-
             modelBuilder.Entity<User>().HasMany(u => u.Animals);
             modelBuilder.Entity<Animal>().HasOne(p => p.User);          
 
