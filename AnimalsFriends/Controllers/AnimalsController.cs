@@ -39,7 +39,7 @@ namespace AnimalsFriends.Controllers
             return Ok(animals.ToArray());
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public IActionResult GetAnimal(int id)
         {
             var animal = _context.Animals.Find(id);
