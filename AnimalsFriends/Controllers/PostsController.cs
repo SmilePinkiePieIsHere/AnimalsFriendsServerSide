@@ -1,15 +1,11 @@
 ﻿using AnimalsFriends.Helpers;
 using AnimalsFriends.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace AnimalsFriends.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class PostsController : ControllerBase
     {
