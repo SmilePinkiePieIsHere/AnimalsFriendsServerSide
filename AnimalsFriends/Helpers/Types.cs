@@ -1,23 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace AnimalsFriends.Helpers
 {
-    public class Types
+    public class Classes
     {
-        public enum AnimalStatus
+        public class AnimalStatus
         {
-            NeedHome,
-            Adopted,
-            InMedicalCare
+            public static string NeedHome = "NeedHome";
+
+            public static string Adopted = "Adopted";
+
+            public static string InMedicalCare = "InMedicalCare";
         }
 
-        public enum AnimalSpecies
+        public class AnimalSpecies
         {
-            Dog,
-            Cat
+            public static string Cat = "cat";
+
+            public static string Dog = "dog";
         }
 
         public enum UserRole
@@ -32,10 +36,11 @@ namespace AnimalsFriends.Helpers
             Causes
         }
 
-        public enum Gender
+        public class Gender
         {
-            Male,
-            Female
-        }
+            public static string Male = "male";
+
+            public static string Female = "female";
+        }    
     }
 }

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using static AnimalsFriends.Helpers.Types;
-
+using static AnimalsFriends.Helpers.Classes;
 namespace AnimalsFriends.Models
 {
     public class Animal
@@ -13,13 +12,11 @@ namespace AnimalsFriends.Models
 
         public string Name { get; set; }
 
-        public Gender Gender { get; set; }
-
-        //can make it class later on
-        public AnimalStatus CurrentStatus { get; set; }
-
-        //can make it class later on
-        public AnimalSpecies Species { get; set; }
+        public string Gender { get; set; }
+        
+        public string CurrentStatus { get; set; }
+        
+        public string Species { get; set; }
 
         public string Description { get; set; }
 

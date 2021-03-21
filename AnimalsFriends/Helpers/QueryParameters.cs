@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static AnimalsFriends.Helpers.Types;
+using static AnimalsFriends.Helpers.Classes;
 
 namespace AnimalsFriends.Helpers
 {

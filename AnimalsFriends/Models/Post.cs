@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using static AnimalsFriends.Helpers.Types;
+using static AnimalsFriends.Helpers.Classes;
 
 namespace AnimalsFriends.Models
 {
@@ -19,9 +19,6 @@ namespace AnimalsFriends.Models
 
         //can make it class later on
         public BlogCategory Category { get; set; }
-
-        //can make it class later on - add later
-        //public List<string> Tag { get; set; }
 
         //Author
         public int UserId { get; set; }
