@@ -27,6 +27,11 @@ namespace AnimalsFriends.Controllers
                 animals = animals.Where(a => a.CurrentStatus.ToString().ToLower() == queryParameters.Status.ToLower());
             }
 
+            if (queryParameters.Species != null)
+            {
+                animals = animals.Where(a => a.Species.ToString().ToLower() == queryParameters.Species.ToLower());
+            }
+
             animals = animals
                .Skip(queryParameters.Size * (queryParameters.Page - 1))
                .Take(queryParameters.Size);

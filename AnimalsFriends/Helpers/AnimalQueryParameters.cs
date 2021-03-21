@@ -6,5 +6,8 @@ namespace AnimalsFriends.Helpers
     {     
         [JsonProperty("status")]
         public string Status { get; set; }
+
+        [JsonProperty("species")]
+        public string Species { get; set; }
     }
 }
