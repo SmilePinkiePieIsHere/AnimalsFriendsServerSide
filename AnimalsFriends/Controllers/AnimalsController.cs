@@ -86,11 +86,20 @@ namespace AnimalsFriends.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
-        public IActionResult RemoveAnimal()
+        [HttpDelete("{id}")]
+        public IActionResult RemoveAnimal([FromRoute] int id)
         {
-            var animals = _context.Animals.ToList();
-            return Ok(animals);
+            var animal = _context.Animals.Find(id);
+
+            if (animal == null)
+            {
+                return NotFound();
+            }
+
+            _context.Animals.Remove(animal);
+            _context.SaveChanges();
+
+            return (IActionResult)animal;
         }
     }
 }
