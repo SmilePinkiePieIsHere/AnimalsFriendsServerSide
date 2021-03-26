@@ -1,6 +1,7 @@
 ﻿using AnimalsFriends.Helpers;
 using AnimalsFriends.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace AnimalsFriends.Controllers
@@ -51,7 +52,42 @@ namespace AnimalsFriends.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateAnimal()
+        public IActionResult AddAnimal([FromBody] Animal animal)
+        {
+            _context.Animals.Add(animal);
+            _context.SaveChanges();
+
+            return CreatedAtAction("GetAnimal", new { id = animal.Id}, animal);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateAnimal([FromRoute] int id, [FromBody] Animal animal)
+        {
+            if (id != animal.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                _context.Entry(animal).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (_context.Animals.Find(id) == null)
+                {
+                    return NotFound();
+                }
+
+                throw;
+            }           
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public IActionResult RemoveAnimal()
         {
             var animals = _context.Animals.ToList();
             return Ok(animals);
