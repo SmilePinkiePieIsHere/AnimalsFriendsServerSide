@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "M2qJxmkpK+iBCV/MGUt2Y/ZjPHhJMPFHZZUZWC1xU0oXl7Ud3wtHHQ7O9eRjFHUUVI2kCZFNltI4OxICkZV39Q==",
+  "dgSpecHash": "Je/ykMcqt5SyP/Xaq+OcjjLXR+U8GfaZVwdntIut8PAreLUDyX4A3HWmXRyiXVDCHi6REYJMlZWRpZYHt6h/XA==",
   "success": true,
   "projectFilePath": "D:\\Университет\\Магистратура\\дипломна\\AnimalsFriends\\AnimalsFriends\\AnimalsFriends.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\pevan\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.0.0\\microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",
+    "C:\\Users\\pevan\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning.apiexplorer\\5.0.0\\microsoft.aspnetcore.mvc.versioning.apiexplorer.5.0.0.nupkg.sha512",
     "C:\\Users\\pevan\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.4\\microsoft.entityframeworkcore.5.0.4.nupkg.sha512",
     "C:\\Users\\pevan\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.4\\microsoft.entityframeworkcore.abstractions.5.0.4.nupkg.sha512",
     "C:\\Users\\pevan\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.4\\microsoft.entityframeworkcore.analyzers.5.0.4.nupkg.sha512",
