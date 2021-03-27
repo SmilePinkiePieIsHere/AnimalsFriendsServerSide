@@ -1,7 +1,9 @@
 ﻿using AnimalsFriends.Helpers;
 using AnimalsFriends.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AnimalsFriends.Controllers
 {
@@ -17,27 +19,35 @@ namespace AnimalsFriends.Controllers
             _context.Database.EnsureCreated();
         }
 
-        [HttpGet]
-        public IActionResult GetAll([FromQuery] QueryParameters queryParameters)
+        [AllowAnonymous]
+        [Route("register")]
+        [HttpPost]
+        public async Task<OWinResponseToken> Register(User user)
         {
-            IQueryable<User> users = _context.Users;
-
-            users = users
-                .Skip(queryParameters.Size * (queryParameters.Page - 1))
-                .Take(queryParameters.Size);
-
-            return Ok(users.ToArray());
+            return await _userService.Register(user);
         }
 
-        [HttpGet("{id:int}")]
-        public IActionResult GetUser(int id)
+        [AllowAnonymous]
+        [Route("login")]
+        [HttpPost]
+        public async Task<OWinResponseToken> Login(User user)
         {
-            var user = _context.Users.Find(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return Ok(user);
+            return await _userService.Login(user);
+        }
+
+        [AllowAnonymous]
+        [Route("refresh_token")]
+        [HttpPost]
+        public async Task<OWinResponseToken> Refresh([FromBody] string refreshToken)
+        {
+            return await _userService.Refresh(refreshToken);
+        }
+
+        [Route("msg")]
+        [HttpPost]
+        public string GetUserMsg()
+        {
+            return " is authenticated";
         }
     }
 }
