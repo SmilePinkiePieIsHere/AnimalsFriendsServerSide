@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Resources\images\" />
+    <Folder Include="Resources\tempDB\" />
   </ItemGroup>
 
 </Project>
