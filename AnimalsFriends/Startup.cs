@@ -37,7 +37,7 @@ namespace AnimalsFriends
             {
                 options.AddPolicy("AllowAll", builder =>
                     //fix this to use configurationmanager setting, because we will have dev/staging/prod environments
-                    builder.WithOrigins("http://localhost:3000")
+                    builder.WithOrigins("https://localhost:3000")
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
@@ -84,6 +84,13 @@ namespace AnimalsFriends
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(builder =>
+                builder
+                    .WithOrigins("https://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -97,14 +104,7 @@ namespace AnimalsFriends
 
             app.Map("/api/identity", identityServerApp => identityServerApp.UseIdentityServer());
 
-            app.UseRouting();
-
-            app.UseCors(builder =>
-                builder
-                    .WithOrigins("http://localhost:3000")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials());
+            app.UseRouting();            
 
             app.UseAuthorization();            
 
