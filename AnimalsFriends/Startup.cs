@@ -1,7 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using System.Threading.Tasks;
+using IdentityServer4.AccessTokenValidation;
+using IdentityServer4.Models;
+using IdentityServer4.Test;
 using AnimalsFriends.Configuration;
 using AnimalsFriends.Models;
 using AnimalsFriends.Repositories;
-using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,17 +18,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace AnimalsFriends
 {
     public class Startup
-    {        
+    {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,21 +37,23 @@ namespace AnimalsFriends
             {
                 options.AddPolicy("AllowAll", builder =>
                     //fix this to use configurationmanager setting, because we will have dev/staging/prod environments
-                    builder
-                    .WithOrigins("http://localhost:3000")
+                    builder.WithOrigins("http://localhost:3000")
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             });
 
-            services.AddDbContext<AnimalsFriendsContext>(options => options.UseInMemoryDatabase("Animals"));
+            services.AddControllers()
+            // Below JSON options are the default for ASP NET CORE 3.1
+            // Written only for clarity. Can be safely removed as a whole.
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                options.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
+                options.JsonSerializerOptions.AllowTrailingCommas = false;
+            });
 
-            services.AddControllers().AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
-                    options.JsonSerializerOptions.AllowTrailingCommas = false;
-                });
+            //services.AddDbContext<CatalogContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentityServer()
                 .AddInMemoryApiResources(InMemoryConfig.GetApiResources())
@@ -59,17 +62,17 @@ namespace AnimalsFriends
                 .AddDeveloperSigningCredential();
 
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-          // The method below also adds IHttpClientFactory to the service collection.
-          // https://github.com/IdentityModel/IdentityModel.AspNetCore.OAuth2Introspection/blob/master/src/OAuth2IntrospectionExtensions.cs#L53
-          .AddIdentityServerAuthentication(options =>
-          {
-              options.Authority = "https://localhost:44337/api/identity";
-              options.ApiName = "AnimalsFriends";
-              options.ApiSecret = "testSecret";
-              options.SupportedTokens = SupportedTokens.Jwt;
-              options.RequireHttpsMetadata = false;
-              options.Validate();
-          });
+           // The method below also adds IHttpClientFactory to the service collection.
+           // https://github.com/IdentityModel/IdentityModel.AspNetCore.OAuth2Introspection/blob/master/src/OAuth2IntrospectionExtensions.cs#L53
+           .AddIdentityServerAuthentication(options =>
+           {
+               options.Authority = "https://localhost:44337/api/identity";
+               options.ApiName = "AnimalsFriends";
+               options.ApiSecret = "testSecret";
+               options.SupportedTokens = SupportedTokens.Jwt;
+               options.RequireHttpsMetadata = false;
+               options.Validate();
+           });
 
             services.AddHttpContextAccessor();
 
@@ -95,17 +98,17 @@ namespace AnimalsFriends
             app.UseRouting();
 
             app.UseCors(builder =>
-               builder
-                   .WithOrigins("https://localhost:3000")
-                   .AllowAnyHeader()
-                   .AllowAnyMethod()
-                   .AllowCredentials());
+                builder
+                    .WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials());
 
-            app.UseAuthorization();
+            app.UseAuthorization();            
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers().RequireAuthorization();
             });
         }
     }
