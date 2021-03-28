@@ -1,4 +1,7 @@
+using AnimalsFriends.Configuration;
 using AnimalsFriends.Models;
+using AnimalsFriends.Repositories;
+using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -18,9 +21,7 @@ using System.Threading.Tasks;
 namespace AnimalsFriends
 {
     public class Startup
-    {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
+    {        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -50,26 +51,55 @@ namespace AnimalsFriends
                     options.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
                     options.JsonSerializerOptions.AllowTrailingCommas = false;
                 });
+
+            services.AddIdentityServer()
+                .AddInMemoryApiResources(InMemoryConfig.GetApiResources())
+                .AddTestUsers(new UserRepository().GetUsers())
+                .AddInMemoryClients(InMemoryConfig.GetClients())
+                .AddDeveloperSigningCredential();
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+          // The method below also adds IHttpClientFactory to the service collection.
+          // https://github.com/IdentityModel/IdentityModel.AspNetCore.OAuth2Introspection/blob/master/src/OAuth2IntrospectionExtensions.cs#L53
+          .AddIdentityServerAuthentication(options =>
+          {
+              options.Authority = "https://localhost:44337/api/identity";
+              options.ApiName = "AnimalsFriends";
+              options.ApiSecret = "testSecret";
+              options.SupportedTokens = SupportedTokens.Jwt;
+              options.RequireHttpsMetadata = false;
+              options.Validate();
+          });
+
+            services.AddHttpContextAccessor();
+
+            DependencyConfig.Populate(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseIdentityServer();
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthentication();
+
+            app.Map("/api/identity", identityServerApp => identityServerApp.UseIdentityServer());
+
+            app.UseRouting();
+
             app.UseCors(builder =>
                builder
                    .WithOrigins("https://localhost:3000")
                    .AllowAnyHeader()
                    .AllowAnyMethod()
                    .AllowCredentials());
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();           
-
-            app.UseRouting();
 
             app.UseAuthorization();
 

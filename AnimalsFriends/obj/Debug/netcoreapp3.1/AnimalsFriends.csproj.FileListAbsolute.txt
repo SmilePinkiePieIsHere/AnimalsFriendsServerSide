@@ -34,3 +34,16 @@ D:\Университет\Магистратура\дипломна\AnimalsFrien
 D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\obj\Debug\netcoreapp3.1\AnimalsFriends.csproj.CopyComplete
 D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\IdentityModel.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\IdentityModel.AspNetCore.OAuth2Introspection.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\IdentityServer4.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\IdentityServer4.AccessTokenValidation.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\IdentityServer4.Storage.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\Университет\Магистратура\дипломна\AnimalsFriends\AnimalsFriends\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

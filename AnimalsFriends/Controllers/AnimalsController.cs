@@ -1,8 +1,8 @@
 ﻿using AnimalsFriends.Helpers;
 using AnimalsFriends.Models;
+using AnimalsFriends.Contracts.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace AnimalsFriends.Controllers
 {
@@ -10,41 +10,23 @@ namespace AnimalsFriends.Controllers
     [Route("[controller]")]
     public class AnimalsController : ControllerBase
     {
-        private readonly AnimalsFriendsContext _context;
-        public AnimalsController(AnimalsFriendsContext context)
+        private readonly IAnimalService _animalService;
+        public AnimalsController(IAnimalService animalService)
         {
-            _context = context;
-
-            _context.Database.EnsureCreated();
+            _animalService = animalService;
         }
 
         [HttpGet]
         public IActionResult GetAll([FromQuery] AnimalQueryParameters queryParameters)
         {
-            IQueryable<Animal> animals = _context.Animals;
-            
-            if (queryParameters.Status != null)
-            {
-                animals = animals.Where(a => a.CurrentStatus.ToString().ToLower() == queryParameters.Status.ToLower());
-            }
-
-            if (queryParameters.Species != null)
-            {
-                animals = animals.Where(a => a.Species.ToString().ToLower() == queryParameters.Species.ToLower());
-            }
-
-            animals = animals
-               .Skip(queryParameters.Size * (queryParameters.Page - 1))
-               .Take(queryParameters.Size);
-
-            return Ok(animals.ToArray());
+            return Ok(_animalService.GetAll(queryParameters)); 
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetAnimal(int id)
+        public ActionResult GetAnimal(int id)
         {
-            var animal = _context.Animals.Find(id);
-            if(animal == null)
+            var animal = _animalService.GetAnimal(id);
+            if (animal == null)
             {
                 return NotFound();
             }
@@ -52,16 +34,14 @@ namespace AnimalsFriends.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddAnimal([FromBody] Animal animal)
+        public ActionResult<Animal> AddAnimal([FromBody] Animal animal)
         {
-            _context.Animals.Add(animal);
-            _context.SaveChanges();
-
+            _animalService.AddAnimal(animal);
             return CreatedAtAction("GetAnimal", new { id = animal.Id}, animal);
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateAnimal([FromRoute] int id, [FromBody] Animal animal)
+        public ActionResult UpdateAnimal([FromRoute] int id, [FromBody] Animal animal)
         {
             if (id != animal.Id)
             {
@@ -70,15 +50,16 @@ namespace AnimalsFriends.Controllers
 
             try
             {
-                _context.Entry(animal).State = EntityState.Modified;
-                _context.SaveChanges();
+                _animalService.UpdateAnimal(animal);               
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (_context.Animals.Find(id) == null)
-                {
-                    return NotFound();
-                }
+                //if (_context.Animals.Find(id) == null)
+                //{
+                //    return NotFound();
+                //}
+
+                return NotFound();
 
                 throw;
             }           
@@ -87,19 +68,18 @@ namespace AnimalsFriends.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult RemoveAnimal([FromRoute] int id)
+        public ActionResult RemoveAnimal([FromRoute] int id)
         {
-            var animal = _context.Animals.Find(id);
+            var animal = _animalService.FindAnimal(id);
 
             if (animal == null)
             {
                 return NotFound();
             }
 
-            _context.Animals.Remove(animal);
-            _context.SaveChanges();
+            _animalService.DeleteAnimal(animal);
 
-            return (IActionResult)animal;
+            return Ok(animal); //(ActionResult)animal
         }
     }
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using static AnimalsFriends.Helpers.Classes;
+
 namespace AnimalsFriends.Models
 {
     public class Animal

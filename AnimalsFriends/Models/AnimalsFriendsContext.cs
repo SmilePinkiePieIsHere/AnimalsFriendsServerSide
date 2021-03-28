@@ -15,10 +15,10 @@ namespace AnimalsFriends.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {            
-            modelBuilder.Entity<User>().HasMany(u => u.Posts).WithOne(a => a.User).HasForeignKey(a => a.UserId);
+            //modelBuilder.Entity<User>().HasMany(u => u.Posts).WithOne(a => a.User).HasForeignKey(a => a.UserId);
             modelBuilder.Entity<Post>().HasOne(p => p.User);
 
-            modelBuilder.Entity<User>().HasMany(u => u.Animals);
+            //modelBuilder.Entity<User>().HasMany(u => u.Animals);
             modelBuilder.Entity<Animal>().HasOne(p => p.User);          
 
             modelBuilder.Entity<Animal>().HasMany(u => u.Posts);
