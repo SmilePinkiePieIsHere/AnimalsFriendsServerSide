@@ -20,17 +20,20 @@ namespace AnimalsFriends.Configuration
         private static void RegisterControllers(IServiceCollection services)
         {
             services.AddTransient(typeof(UserController));
+            services.AddTransient(typeof(AnimalsController));
         }
 
         private static void RegisterServices(IServiceCollection services)
         {
             services.AddTransient(typeof(IUserService), typeof(UserService));
+            services.AddTransient(typeof(IAnimalService), typeof(AnimalService));
             services.AddTransient(typeof(IResourceOwnerPasswordValidator), typeof(ResourceOwnerPasswordValidator));
         }
 
         private static void RegisterRepositories(IServiceCollection services)
         {
             services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
+            services.AddTransient(typeof(IAnimalRepository), typeof(AnimalRepository));
         }
     }
 }

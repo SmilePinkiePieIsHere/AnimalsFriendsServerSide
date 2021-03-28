@@ -43,6 +43,8 @@ namespace AnimalsFriends
                     .AllowAnyHeader());
             });
 
+            services.AddDbContext<AnimalsFriendsContext>(options => options.UseInMemoryDatabase("Animals"));
+
             services.AddControllers()
             // Below JSON options are the default for ASP NET CORE 3.1
             // Written only for clarity. Can be safely removed as a whole.

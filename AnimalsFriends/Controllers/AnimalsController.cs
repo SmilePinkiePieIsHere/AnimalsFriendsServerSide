@@ -3,6 +3,7 @@ using AnimalsFriends.Models;
 using AnimalsFriends.Contracts.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AnimalsFriends.Controllers
 {
@@ -16,12 +17,14 @@ namespace AnimalsFriends.Controllers
             _animalService = animalService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAll([FromQuery] AnimalQueryParameters queryParameters)
         {
             return Ok(_animalService.GetAll(queryParameters)); 
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult GetAnimal(int id)
         {

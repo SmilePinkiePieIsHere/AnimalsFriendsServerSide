@@ -4,10 +4,11 @@ using AnimalsFriends.Contracts.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using AnimalsFriends.Contracts.Services;
 
 namespace AnimalsFriends.Services
 {
-    public class AnimalService : IAnimalRepository
+    public class AnimalService : IAnimalService
     {
         private readonly IAnimalRepository _animalRepository;
 
